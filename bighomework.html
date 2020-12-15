@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myblog</title>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		/* 分界线 */
+		.box{
+            width: 1000px;
+            height: 364px;
+            overflow: hidden;
+            margin: 50px auto;
+            position: relative;
+            }
+        .img{
+            top: 0px;
+            left: 0px;
+            width: 10000%;
+            position: absolute;
+        }
+        .img li{
+            float: left;
+            list-style: none;
+        }
+        .circle{
+            left: 50%;
+            bottom: 10px;
+            margin-left: -75px;
+            position: absolute;
+        }
+        .circle li{
+            width: 20px;
+            height: 20px;
+            float: left;
+            color: #666;
+            cursor: pointer;
+            margin: 0px 5px;
+            list-style: none;
+            text-align: center;
+            border-radius: 10px;
+            background: #e4e4e4;
+            font: normal 12px/20px "conslas";
+        }
+
+        .arrow{
+            top: 50%;
+            width: 100%;
+            position: absolute;
+            margin-bottom: -25px;
+        }
+        .arrow li{
+            width: 35px;
+            height: 50px;
+            color: #666;
+            cursor: pointer;
+            list-style: none;
+            text-align: center;
+            background: #ccc;
+            font: 800 30px/50px "conslas";
+        }
+        .arrow li.left{
+            float:left;
+	    }
+        .arrow li.right{
+            float: right;
+        }
+        .circle li.current{
+            color:#fff;
+            background: red;
+        }
+
+
+            /* 分界线 */
+		a{
+			text-decoration: none;
+		}
+		ul{
+			list-style: none;
+		}
+		.clear::after{
+			content: '';
+			display:block;
+			height: 0;
+			clear: both;
+		}
+
+
+		.header{
+			width: 1200px;
+			margin: 0px auto;
+		}
+		.header-top{
+			border-bottom: 1px solid rgba(249, 205, 173, 1.0);
+			height: 32px;
+			line-height: 32px;
+		}
+		.header-bottom{
+			background: rgba(255, 251, 240, 1.0);
+			height: 110px;
+		}
+		.container{
+			width: 1200px;
+			margin: 0 auto;
+		}
+		.header-fro{
+			float: right;
+		}
+		.header-fro li{
+			float: left;
+			margin-left: 30px;
+		}
+		.header-fro a{
+			font-size: 12px;
+			font-weight: 300;
+			color: rgba(0,0,0,1);
+		}
+		.phone{
+			padding-left: 17px;
+			background: url('img/phone.png') no-repeat left  center;
+		}
+		.weixin{
+			padding-left: 24px;
+			background: url('img/weixin.png') no-repeat left  center;
+		}
+		.qq{
+			padding-left: 24px;
+			background: url('img/QQ.jpg') no-repeat left  center ;
+		}
+		.logo{
+			margin-top: 10px;
+			float: left;
+		}
+		.nav{
+			float: left;
+			margin-top: 38px;
+		}
+		.form{
+			margin-top: 30px;
+			float: right;
+		}
+		.nav li{
+			float: left;
+			font-size: 16px;
+			font-weight: bold;
+			width: 120px;
+			text-align: center;
+			border-right: 1px solid black;
+		}
+		.nav a{
+			color: rgba(0, 0, 0, 1.0);
+		}
+		.nav .first{
+			margin-left: 40px;
+		}
+		.nav .last{
+			border: none;
+		}
+		.search{
+			height: 15px;
+			width: 150px;
+			float: left;
+			padding: 9px;
+			border: 1px solid rgba(249, 205, 173, 1.0);
+		}
+		.submit{
+			float: left;
+			width: 36px;
+			height: 36px;
+			background:url('img/search.png')no-repeat center
+			center rgba(150, 150, 150, 1.0);
+			border: 1px solid rgba(249, 205, 173, 1.0);
+		}
+		/* 背景图 */
+		/* .banner-picture{
+			height: 550px;
+			position: relative;
+		}
+		.banner-picture li{
+ 		     height:550px ;
+		}
+		
+		.banner-one{
+			background: url('img/banner.jpg')  no-repeat center center;
+		} */
+		.prev{
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			top: 240px;
+			left: 8%;
+			background: black;
+		}
+		.next{
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			top: 240px;
+			right: 8%;
+			background: black;
+		}
+		.welcome{
+			width: 1200px;
+			margin: 0px auto 10px;
+			height: 60px;
+			background: #f2e7ca ;
+			
+		}
+		.welcome .sentence1{
+			text-align: center;
+			margin: 15px;
+			height: 30px;
+			line-height: 30px;
+			width: 350px;
+			float: left;
+			font-family:"Kaiti";
+	        font-size:25px;
+	        vertical-align:middle;
+	        font-weight:normal;
+			background: rgba(255, 251, 240, 1.0);
+			
+
+
+		}
+		.welcome .sentence2{
+			text-align: center;
+			margin: 15px;
+			height: 30px;
+			line-height: 30px;
+			width: 250px;
+			font-family:"Kaiti";
+	        font-size:25px;
+	        vertical-align:middle;
+	        font-weight:normal;
+			float: right;
+			background: rgba(255, 251, 240, 1.0);
+		}
+		.center{
+			width: 1200px;
+			margin: 0px auto;
+
+		}
+		.center ul li{
+			background: rgb(249, 205, 173, 0.8);
+		}
+		.guide-one,.guide-two{
+			margin-top: 20px;
+			margin-bottom: 20px;
+			
+			width: 200px;
+			height: 30px;
+			text-align: center;
+			font-size:20px ;
+			font-weight: 300;
+			color: purple;
+			background: rgba(255, 251, 240, 1.0);
+
+		}
+		.center .list-one li{
+			width:200px ;
+			height: 250px;
+			padding: 10px 40px;
+			float: left;
+			border: 1px solid rgba(0,164,255,1);
+			margin-right: 10px;
+			margin-bottom: 10px;
+			position: relative;
+		}
+
+		/* list-one */
+
+		.center .list-one li img{
+			width: 170px;
+			height: 120px;
+			padding: 0px 15px;
+			position: absolute;
+			top: 10px;
+
+		}
+		.center .content{
+			margin: 10px 0;
+			width: 100px;
+			text-align: center;
+			font-size: 18px;
+			font-weight: 300;
+			background: rgba(255, 251, 240, 1.0);
+			position: absolute;
+			top: 135px;
+			left: 90px;
+		}
+		.center .content a{
+			color: red;
+		}
+		.center .info{
+			position: absolute;
+			top: 200px;
+			left: 20px;
+		}
+		/* list-two */
+		.center .list-two li{
+			height: 100px;
+			width: 400px;
+			position: relative;
+			margin-bottom: 20px;
+			border: 1px solid rgba(0,164,255,1);
+			background: rgba(255, 251, 240, 1.0);
+
+		}
+		.center .list-two .left1{
+			float: left;
+			margin-left: 50px;
+
+		}
+		.center .list-two .right1{
+			float: right;
+			margin-right: 100px;
+		}
+		.center .list-two li p{
+			line-height: 100px;
+			text-align: center;
+			font-size: 20px;
+			font-weight: 400;
+
+		}
+		.center .list-two li .tips{
+			color: gray;
+			font-size: 12px;
+			font-weight: normal;
+			position: absolute;
+			right: 0%;
+			bottom: 0%;
+
+		}
+		.center .list-two a{
+			color: red;
+		}
+		.empty-box{
+			height: 250px;
+			width: 1200px;
+			background: url('img/bg.jpg') center center no-repeat;
+			margin: 0 auto;
+		}
+		.bottom-top{
+			width: 1200px;
+			margin: 10px auto;
+			background-color:  rgba(255, 251, 240, 1.0);
+			border-style:double ;
+		}
+		.bottom-top .list-three {
+			width: 600px;
+			height: 50px;
+			margin: 0px auto;
+			/* border-style:double ; */
+			background: rgba(255, 251, 240, 1.0);
+		}
+		.bottom-top .list-three li {
+			float: left;
+			width: 100px;
+			height: 50px;
+			
+			line-height: 50px;
+			margin-left: 10px;
+		}
+		.bottom-top .list-three li a{
+
+			color: black;
+		}
+		.bottom-bottom{
+			width: 1200px;
+			margin: 0 auto;
+			background: white;
+		}
+		.bottom-bottom ul li a{
+			color: black;
+		}
+		.bottom-bottom .rights{
+			width: 300px;
+			height: 20px;
+			font-size: 12px;
+			text-align: center;
+			margin: 10px auto 0px;
+
+		}
+		.bottom-bottom .list-four{
+			width: 800px;
+			height: 30px;
+			margin: 10px auto;
+			
+		}
+		.bottom-bottom .list-four li{
+			font-size: 10px;
+			width: 100px;
+			height: 30px;
+			float: left;
+			
+		}
+		.bottom-bottom .list-five{
+			width: 600px;
+			height: 20px;
+			margin: 20px auto;
+		}
+		.bottom-bottom .list-five li{
+			font-size: 12px;
+			width: 200px;
+			float: left;
+			height: 20px;
+
+		
+		}
+		.bottom-bottom .list-five li .special-li{
+			text-align: center;
+		}
+		#returnTop{
+			position: fixed;
+            right: 30px;
+            bottom: 20px;
+            display: none;
+            opacity: 0.4;
+            z-index:10;
+            background-color: white;
+            
+		}
+		.bordenPic{
+			width:1000px ;
+			height:364px;
+		}
+
+
+		
+
+		
+	</style>
+</head>
+<body>
+	<div class="header">
+		<div class="header-top">
+				<div class="container clear">
+					<ul class="header-fro">
+						<li><a href="#">登录/注册</a></li>
+						<li class="phone"><a href="#">移动客户端</a></li>
+						<li class="weixin"><a href="#">微信</a></li>
+						<li class="qq"><a href="#">QQ</a></li>
+
+					</ul>
+				</div>
+		</div>
+		<div class="header-bottom">
+				<div class="container clear">
+					<img src="img/logo.jpg" alt="logo" class="logo">
+					<ul class="nav clear">
+						<li class="first"><a href="#">博客园首页</a></li>
+						<li><a href="#">联系</a></li>
+						<li><a href="#">管理</a></li>
+						<li><a href="#">关于</a></li>
+						<li><a href="#">友链</a></li>
+						<li class="last"><a href="#">赞赏</a></li>
+						
+					</ul>
+					<form action="" class="clear form">
+						
+						<input type="text" placeholder="快速搜索" class="search">
+						<input type="button" class="submit"/>
+					</form>
+				</div>
+		</div>
+	
+
+	</div>
+	<div class="welcome clear">
+		<p class="sentence1">欢迎来到ACM_Walker的博客QAQ</p>
+		<p class="sentence2">敬畏每一行代码</p>
+	</div>
+	<!-- 返回顶部 -->
+	<div id = "returnTop">
+		<img src="img/Top.png" alt="" id = "topImg">
+	</div>
+	<!-- banner图 -->
+	<div class="box">
+        <ul class="img">
+            <li><img class = "bordenPic" src="img/ban1.jpg" alt="" /></li>
+            <li><img class = "bordenPic" src="img/ban2.jpg" alt="" /></li>
+            <li><img class = "bordenPic" src="img/ban3.jpg" alt="" /></li>
+            <li><img class = "bordenPic" src="img/ban4.jpg" alt="" /></li>
+            <li><img class = "bordenPic" src="img/ban5.jpg" alt="" /></li>
+        </ul>
+        <ul class="circle">
+
+        </ul>
+        <ul class="arrow">
+            <li class="left"><</li>
+           	<li class="right">></li>
+        </ul>
+    </div>
+
+	<div class="center">
+		<p class="guide-one">算法竞赛&nbsp;>&nbsp;干货</p>
+		<ul class="clear list-one" id = "upAndDown">
+			<li><img id ="pic1" src="img/1.jpg" alt="pciture1">
+				<p class="content"><a href="#">基础算法</a></p>
+				<p class = "info">包括基础排序算法（快排，归并排序），位运算，前缀和与差分</p>
+			</li>
+			<li><img id ="pic2" src="img/2.jpg" alt="pciture2">
+				<p class="content"><a href="#">数据结构</a></p>
+				<p class = "info">手动模拟栈，队列，链表，还有并查集，线段树，树状数组等高级数据结构</p>
+			</li>
+			<li><img id ="pic3" src="img/3.jpg" alt="pciture3">
+				<p class="content"><a href="#">STL</a></p>
+				<p class = "info">C++ 中给出的标准模板库，有现成的数据结构，比如队列，栈，优先队列，map，set等</p>
+			</li>
+			<li><img id ="pic4" src="img/4.jpg" alt="pciture4">
+				<p class="content"><a href="#">搜索</a></p>
+				<p class = "info">包括DFS，BFS，以及涉及到的剪枝与回溯问题</p>
+			</li>
+			<li><img id ="pic5" src="img/5.png" alt="pciture5">
+				<p class="content"><a href="#">动态规划</a></p>
+				<p class = "info">包括背包问题，线性DP，区间DP，计数类DP，状态压缩DP等等</p>
+			</li>
+			<li><img id ="pic6" src="img/6.jpg" alt="pciture6">
+				<p class="content"><a href="#">贪心</a></p>
+				<p class = "info">包括区间问题，Huffman树，排序不等式，绝对值不等式等</p>
+			</li>
+			<li><img id ="pic7" src="img/7.jpg" alt="pciture7">
+				<p class="content"><a href="#">数论</a></p>
+				<p class = "info">包括质数，约数，欧拉函数，快速幂，扩展欧几里得算法，中国剩余定理等</p>
+			</li>
+			<li><img id ="pic8" src="img/8.jpg" alt="pciture8">
+				<p class="content"><a href="#">图论</a></p>
+				<p class = "info">树与图的深度优先，广度优先遍历，Dijkstra，bellman-ford</p>
+			</li>
+			
+		</ul>
+		<p class="guide-two">算法竞赛&nbsp;>&nbsp;题解</p>
+		<ul class="clear list-two">
+			<li class="left1">
+				<p><a href="#">LeeCode</a></p>
+				<span class="tips">已收录：309道</span>
+			</li>
+			<li class="right1">
+				<p><a href="#">HDU</a></p>
+				<span class="tips">已收录：410道</span>
+			</li>
+			<li class="left1">
+				<p><a href="#">PKU</a></p>
+				<span class="tips">已收录：290道</span>
+			</li>
+			<li class="right1">
+				<p><a href="#">落谷</a></p>
+				<span class="tips">已收录：251道</span>
+			</li>
+			
+		</ul>
+	</div>
+	<div class="empty-box"></div>
+	<div class="bottom-top clear">
+		<ul class="list-three clear">
+			<li><a href="#">好文要顶</a></li>
+			<li><a href="#">收藏我</a></li>
+			<li><a href="#">关注该文</a></li>
+			<li><a href="#"><img src="img/icon_weibo.png" alt="weibo"></a></li>
+			<li><a href="#"><img src="img/wechat.png" alt="wechat"></a></li>
+		</ul>
+			
+	</div>
+
+	<div style="border-top:1px dashed #cccccc;height: 1px;overflow:hidden">
+		
+	</div>
+
+
+	<div class="bottom-bottom clear">
+		<p class="rights">Copyright © 2020 Acm_walker </p>
+		<p class="rights">Powered by .NET Core on Kubernetes</p>
+		<ul class="clear list-four">
+			<li><a href="https://about.cnblogs.com/">关于博客园</a></li>
+			<li><a href="https://about.cnblogs.com/contact">联系我们</a></li>
+			<li><a href="https://about.cnblogs.com/ad">广告服务</a></li>
+			<li><a href="https://about.cnblogs.com/job">人才服务</a></li>
+			<li><span>©2004-2020</span></li>
+			<li><a href="https://about.cnblogs.com/">博客园</a></li>
+			<li><span>保留所有权利</span></li>
+			<li><a href="http://www.beian.miit.gov.cn/">沪ICP备09004260号</a></li>
+		</ul>
+		<ul class="list-five clear">
+			<li><p class="special-li"><a href="https://ss.knet.cn/verifyseal.dll?sn=e131108110100433392itm000000&ct=df&a=1&pa=0.25787803245785335"><img src="img/cnnic.png" alt=""></a></p></li>
+			<li class="special-text"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502001144">沪公网安备&nbsp;31011502001144号</a></li>
+			<li><p class="special-li"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502001144"><img src="img/ghs.png" alt=""></a></p></li>
+		</ul>
+
+
+	</div>
+	<script>
+		var topDiv = document.getElementById("returnTop");
+        var imgTop=document.getElementById("topImg");
+            window.onscroll=function(){
+                if(scroll().top>100){
+                topDiv.style.display="block";
+            }else{
+                topDiv.style.display="none";
+                }
+            }
+
+            imgTop.onclick=function(){
+                clearInterval(imgTop.timer);
+                imgTop.timer=setInterval(function(){
+                    var speed=(0-scroll().top)/10;
+                    speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                    window.scrollTo(0,scroll().top+speed);
+                    if(scroll().top==0){
+                        clearInterval(imgTop.timer);
+                    }
+                },30)
+            }
+
+
+            function scroll(){
+                return{
+                   "top":document.documentElement.scrollTop+document.body.scrollTop,
+                   "left":document.documentElement.scrollLeft+document.body.scrollLeft
+                }
+            }
+            //upAndDown
+            //start
+            window.onload = function(){
+            	var pic1 = document.getElementById("pic1");
+            	
+            	pic1.onmouseover = function(){
+            		startMove(-1,-15,pic1);
+            	}
+            	pic1.onmouseout = function(){
+            		startMove(1,10,pic1);
+            	}
+            	var pic2 = document.getElementById("pic2");
+            	
+            	pic2.onmouseover = function(){
+            		startMove(-1,-15,pic2);
+            	}
+            	pic2.onmouseout = function(){
+            		startMove(1,10,pic2);
+            	}
+            	var pic3 = document.getElementById("pic3");
+            	
+            	pic3.onmouseover = function(){
+            		startMove(-1,-15,pic3);
+            	}
+            	pic3.onmouseout = function(){
+            		startMove(1,10,pic3);
+            	}
+            	var pic4 = document.getElementById("pic4");
+            	
+            	pic4.onmouseover = function(){
+            		startMove(-1,-15,pic4);
+            	}
+            	pic4.onmouseout = function(){
+            		startMove(1,10,pic4);
+            	}
+            	var pic5 = document.getElementById("pic5");
+            	
+            	pic5.onmouseover = function(){
+            		startMove(-1,-15,pic5);
+            	}
+            	pic5.onmouseout = function(){
+            		startMove(1,10,pic5);
+            	}
+            	var pic6 = document.getElementById("pic6");
+            	
+            	pic6.onmouseover = function(){
+            		startMove(-1,-15,pic6);
+            	}
+            	pic6.onmouseout = function(){
+            		startMove(1,10,pic6);
+            	}
+            	var pic7 = document.getElementById("pic7");
+            	
+            	pic7.onmouseover = function(){
+            		startMove(-1,-15,pic7);
+            	}
+            	pic7.onmouseout = function(){
+            		startMove(1,10,pic7);
+            	}
+            	var pic8 = document.getElementById("pic8");
+            	
+            	pic8.onmouseover = function(){
+            		startMove(-1,-15,pic8);
+            	}
+            	pic8.onmouseout = function(){
+            		startMove(1,10,pic8);
+            	}
+
+            	//渐变色
+            	setInterval(function(){
+    			var li1 = document.getElementsByClassName("left1");
+    			li1[0].style.backgroundColor = color();
+    			li1[1].style.backgroundColor = color();
+    			var li2 = document.getElementsByClassName("right1");
+    			li2[0].style.backgroundColor = color();
+    			li2[1].style.backgroundColor = color();
+    		},1000);
+            
+
+            var timer1 = null;
+            function startMove(speed,iTarget,pic){
+            	clearInterval(timer1);
+            	
+            	timer1 = setInterval(function(){
+            		if(pic.offsetTop == iTarget){
+            			clearInterval(timer1);
+
+            		}else{
+            			pic.style.top = pic.offsetTop + speed +'px';
+            		}
+            	},30);
+            }
+
+        //背景渐变色
+         function color() {
+        	var r = parseInt(Math.random() * 255);
+        	var g = parseInt(Math.random() * 255);
+        	var b = parseInt(Math.random() * 255);
+        	var a = Math.random() * 0.7 + 0.3;
+        	
+        	var rgba = "rgba(" + r + "," + g + "," + b + "," + a + ")";
+
+        	return rgba;
+    	}
+    }
+     	var box=document.getElementsByClassName("box")[0];
+        var img=document.getElementsByClassName("img")[0];
+        var circle=document.getElementsByClassName("circle")[0];
+        var arrow=document.getElementsByClassName("arrow")[0];
+        var left=document.getElementsByClassName("left")[0];
+        var right=document.getElementsByClassName("right")[0];
+        var index=0;
+
+      
+       
+        var addImg=img.children[0].cloneNode(true);
+        img.appendChild(addImg);
+
+       
+        var circles=img.children;
+        for(var i=1;i<circles.length;i++){
+            var circleLi=document.createElement("li");
+            circleLi.innerHTML=i;
+            circle.appendChild(circleLi);
+        }
+
+        var points=circle.children;
+        light();
+
+        function light(){
+            for(var i=0;i<points.length;i++){
+                points[i].className="";
+                if(index>4){
+                    points[0].className="current";
+                }else{
+                    points[index].className="current";
+                }
+            }
+        }
+           
+        for(var j=0;j<points.length;j++){
+            points[j].index=j;
+            points[j].onclick=function(){
+                index=this.index;
+                animate(img,-index*box.offsetWidth);
+                light();
+            }
+        }
+
+          
+          right.onclick=autoplay;
+
+          function autoplay(){
+            index++;
+            if(index>circles.length-1){
+                img.style.left=0;
+                index=1;
+            }
+            animate(img,-index*box.offsetWidth);
+            light();
+          }
+          left.onclick=function(){
+             index--;
+             if(index<0){
+                img.style.left=-(circles.length-1)*box.offsetWidth+"px";
+                index=circles.length-2;
+             }
+             animate(img,-index*box.offsetWidth);
+             light();
+          }
+            
+           box.timer=setInterval(autoplay,2000);
+           box.onmouseover=function(){
+            clearInterval(box.timer);
+           }
+           box.onmouseout=function(){
+            clearInterval(box.timer);
+            box.timer=setInterval(autoplay,2000);
+           }
+
+
+          function animate(obj,target){
+                clearInterval(obj.timer);
+                obj.timer=setInterval(function(){
+                    var speed=(obj.offsetLeft>target?-20:20);
+                    if(Math.abs(obj.offsetLeft-target)>20){
+                        obj.style.left=obj.offsetLeft+speed+"px";
+                    }else{
+                        obj.style.left=target+"px";
+                    }
+                },20)
+            }
+	</script>
+</body>
+</html>
